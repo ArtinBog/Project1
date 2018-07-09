@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Flights
+{% endblock %}
+
+{% block body %}
+    <h1>List of locations</h1>
+
+    <form action="{{ url_for('locations') }}" method="post">
+
+    <div class="form-group">
+    <table class="table table-striped" name="locations">
+        <p>testing</p>
+        <thead>
+            <th scope="col">Zipcode</th>
+            <th scope="col">City</th>
+            <th scope="col">State</th>
+            <th scope="col">Latitude</th>
+            <th scope="col">Longtide</th>
+            <th scope="col">Population</th>
+        </thead>
+        <tbody>
+
+        {% for location in locations %}
+            <tr>
+                <th scope="row">{{ locations.id }}</th>
+                <td>{{ locations.zipcode }}</td>
+                <td>{{ locations.city }}</td>
+                <td>{{ locations.state }}</td>
+                <td>{{ locations.lat }}</td>
+                <td>{{ locations.long }}</td>
+                <td>{{ locations.population }}</td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    </form>
+
+{% endblock %}
