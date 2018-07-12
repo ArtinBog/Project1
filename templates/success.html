@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}{% endblock %}
+{% block navbar %}{% endblock %}
+{% block content %}
+  <div class="alert alert-success" role="alert">
+    Congratulations! You have successfully create an account.
+  </div>
+  <a href="{{ url_for('index') }}">Back</a>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}{% endblock %}
+{% block navbar %}{% endblock %}
+{% block content %}
+    <h1>Sign Up</h1>
+    <div class="center-block" id="content">
+        <form action="{{ url_for('signup') }}" method="post">
+            <ul class="center-block form-group col-md-4" name="user">
+                <!--this is name form-->
+                <label for="InputName">Name</label>
+                <li><input type="text" class="form-control" name="name" placeholder="Your Name" required></li>
+
+                <label for="InputName">Email Address</label>
+                <li><input type="email" class="form-control" name="emailaddress" placeholder="Email" required></li>
+
+                <label for="InputName">Username</label>
+                <li><input type="username" class="form-control" name="username" placeholder="Username" required></li>
+
+                <label for="InputName">Password</label>
+                <li><input type="password" class="form-control" name="password" placeholder="Password" required></li>
+
+                <!--This is CTA-->
+                <li><button class="btn btn-primary" type="submit">Create Account</button></li>
+            <ul>
+        </form>
+    </div>
+{% endblock %}
+

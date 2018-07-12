@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
-
-{% block title %}
-    Error
-{% endblock %}
-
-{% block body %}
+{% block title %}Index{% endblock %}
+{% block head %}{% endblock %}
+{% block navbar %}{% endblock %}
+{% block content %}
     <h1>Error</h1>
+    <p><a href="http://ide50-mea.cs50.io:8080/">Home</a></p>
 
     {{ message }}
 {% endblock %}
+

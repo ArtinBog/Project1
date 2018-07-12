@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block head %}{% endblock %}
+{% block title %}Index{% endblock %}
+{% block navbar %}{% endblock %}
+{% block content %}
+    <h1>Location Details</h1>
+    <p>{{ location }}</p>
+    <p>{{ zipcode_entry }}</p>
+    <p>{{ weather_data }}</p>
+    <p>{{ message }}</p>
+    {% if ischecked %}
+    <a class="btn btn-primary disabled" href="{{ url_for('check_in', location_id = location.id, zipcode = zipcode_entry) }}">Check in  ({{ check_in }})</a>
+    {% else %}
+    <a class="btn btn-primary active" href="{{ url_for('check_in', location_id = location.id, zipcode = zipcode_entry) }}">Check in {{ check_in }}</a>
+    {% endif %}
+
+    <form class="form-group row" method="post" action="{{ url_for('comment', location_id = location.id, zipcode = zipcode_entry) }}">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <label for="TextArea">Visitor's Comments</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter comment" name="comment_entry"></textarea>
+            <button type="submit">Submit Comment</button>
+        </div>
+        <div class="col-lg-4"></div>
+    </form>
+    <ul>
+    {% for comment in comment_in_location %}
+        <li>{{ comment.user_id }}{{ comment.comment }}</li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

@@ -1,29 +1,23 @@
 {% extends "layout.html" %}
+{% block title %}Weather{% endblock %}
+{% block head %}{% endblock %}
+{% block navbar %}{% endblock %}
+{{ message }}
+{% block content %}
+<div class="row" align-content="center">
+    <h1>Check Location</h1>
+    <form action="{{ url_for('search') }}" method="post" class="form-group row">
 
-{% block title %}
-    Artin's Forecasting
-{% endblock %}
-
-{% block body %}
-    <h1>Check the weather</h1>
-
-    <form action="{{ url_for('more_info') }}" method="post">
-
-        <div class="form-group">
-            <select class="form-control" name="locations">
-                {% for location in locations %}
-                    <option value="{{ locations }}">{{ locations.zipcode }}, {{ locations.city }}</option>
-                {% endfor %}
-            </select>
+        <!--this is name form-->
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <input type="text" class="form-control" name="search_entry" placeholder="City's ZIP code">
         </div>
-
-        <div class="form-group">
-            <input class="form-control" name="name" placeholder="Enter City or Zipcode">
+        <!--This is CTA-->
+        <div class="col-lg-2">
+            <button class="btn btn-primary" type="submit">Search your city</button>
         </div>
-
-        <div class="form-group">
-            <button class="btn btn-primary">Search</button>
-        </div>
-
+        <div class="col-lg-3"></div>
     </form>
+</div>
 {% endblock %}

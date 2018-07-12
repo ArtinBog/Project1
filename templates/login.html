@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}{% endblock %}
+{% block navbar %}{% endblock %}
+{% block content %}
+<div class="alert alert-success">{{ message }}</div>
+{% if session['logged_in'] %}
+<p>You're logged in already!</p>
+{% else %}
+<h1>LOGIN</h1>
+    <form action="{{ url_for('login') }}" method="post">
+        <ul class="form-group col-md-6 center-block" name="user_login">
+
+            <!--this is name form-->
+            <label for="InputName">Username</label>
+            <li><input type="username" class="form-control" name="username" placeholder="Username"></li>
+
+            <label for="InputName">Password</label>
+            <li><input type="password" class="form-control" name="password" placeholder="Password"></li>
+
+            <!--This is CTA-->
+            <li><button class="btn btn-primary" type="submit">Login</button></li>
+        <ul>
+    </form>
+{% endif %}
+{% endblock %}
+
