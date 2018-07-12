@@ -1,7 +1,7 @@
 import os
 import requests, json
 
-from flask import Flask, session, request, render_template, redirect, g, url_for, flash
+from flask import Flask, session, request, render_template, redirect, g, url_for, flash, jsonify
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -68,7 +68,7 @@ def search():
         # Make sure that the zip id is a number (in case of a weird error).
         try:
             zipcode_entry = int(search_entry)
-            location = db.execute("SELECT * FROM locations WHERE zipcode = :zipcode_entry", {"zipcode_entry": zipcode_entry}).fetchall()
+            location = db.execute("SELECT * FROM locations WHERE CAST(zipcode as varchar(20)) LIKE '%"+str(zipcode_entry)+"%'").fetchall()
 
         except ValueError:
             city_entry = search_entry
@@ -77,7 +77,7 @@ def search():
             db.commit()
 
         if len(location) < 1:
-            return(render_template("search.html", message="there's no result for your query " + search_entry))
+            return(render_template("search.html", message="There's no result for your query " + search_entry))
 
 
         print(search_entry)
@@ -145,6 +145,7 @@ def comment(location_id, zipcode):
     comment_entry = request.form['comment_entry']
     user_id = session.get('user_id')
 
+
     db.execute("INSERT INTO comments (location_id, user_id, comment) VALUES (:location_id, :user_id, :comment)",
     {"location_id": location_id, "user_id": user_id, "comment": comment_entry})
 
@@ -201,7 +202,22 @@ def logout():
     session.clear()
     return render_template("index.html")
 
+@app.route('/api/<int:zipcode>', methods=["GET"])
+def api(zipcode):
 
+    location = db.execute("SELECT * FROM locations WHERE zipcode =:zipcode", {"zipcode": zipcode}).fetchone()
+    check_ins = db.execute("SELECT count(*) FROM check_in WHERE location_id = :location_id", {"location_id": location.id}).scalar()
+    data = {
+    "place_name": location.city,
+    "state": location.state,
+    "latitude": str(location.lat),
+    "longitude": str(location.long),
+    "zip": str(location.zipcode),
+    "population": location.population,
+    "check_ins": str(check_ins)
+    }
+
+    return(jsonify(data))
 
 if __name__ == '__main__':
     app.run(debug=True)

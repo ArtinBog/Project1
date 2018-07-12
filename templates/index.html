@@ -1,21 +1,22 @@
 {% extends "layout.html" %}
 {% block title %}Weather{% endblock %}
-{% block head %}{% endblock %}
+{% block head %}<!--Local CSS-->
+{% endblock %}
 {% block navbar %}{% endblock %}
 {{ message }}
 {% block content %}
 <div class="row" align-content="center">
-    <h1>Check Location</h1>
+    <h1 style="text-align: center">Check Location</h1>
     <form action="{{ url_for('search') }}" method="post" class="form-group row">
 
         <!--this is name form-->
         <div class="col-lg-3"></div>
         <div class="col-lg-4">
-            <input type="text" class="form-control" name="search_entry" placeholder="City's ZIP code">
+            <input style="margin: 30px" type="text" class="form-control" name="search_entry" placeholder="City's ZIP code">
         </div>
         <!--This is CTA-->
         <div class="col-lg-2">
-            <button class="btn btn-primary" type="submit">Search your city</button>
+            <button style="margin: 30px" class="btn btn-primary" type="submit">Search your city</button>
         </div>
         <div class="col-lg-3"></div>
     </form>

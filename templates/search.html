@@ -5,22 +5,25 @@
 {% block title %}Some stupid title{% endblock %}
 {% block navbar %}{% endblock %}
 {% block content %}
-    <table class="table table-striped">
-        <thead>
-            <th scope="col">Zipcode</th>
-            <th scope="col">City</th>
-            <th scope="col">State</th>
-            <th scope="col"> ... </th>
-        </thead>
-        <tbody>
-        {% for location in search %}
-            <tr>
-                <th scope="row">{{ location.zipcode }}</th>
-                <td>{{ location.city }}</td>
-                <td>{{ location.state }}</td>
-                <td><a href="{{ url_for('location', zipcode=location.zipcode) }}" class="btn btn-info" role="button">More info</a></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<h3>{{message}}</h3>
+
+<table class="table table-striped" style="align-content: center">
+    <thead>
+        <th scope="col">Zipcode</th>
+        <th scope="col">City</th>
+        <th scope="col">State</th>
+        <th scope="col"> ... </th>
+    </thead>
+    <tbody>
+    {% for location in search %}
+        <tr>
+            <th scope="row">{{ location.zipcode }}</th>
+            <td>{{ location.city }}</td>
+            <td>{{ location.state }}</td>
+            <td><a href="{{ url_for('location', zipcode=location.zipcode) }}" class="btn btn-info" role="button">More info</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}
